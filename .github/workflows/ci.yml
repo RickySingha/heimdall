@@ -46,6 +46,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Set lowercase owner
         run: echo "OWNER_LC=$(echo '${{ github.actor }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
@@ -68,5 +69,5 @@ jobs:
 
       - name: Push image
         run: |
-          docker tag webhook-proxy:${{ github.sha }} ghcr.io/${{ github.actor }}/webhook-proxy:${{ github.sha }}
-          docker push ghcr.io/${{ github.actor }}/webhook-proxy:${{ github.sha }}
+          docker tag webhook-proxy:${{ github.sha }} ghcr.io/${OWNER_LC}/webhook-proxy:${{ github.sha }}
+          docker push ghcr.io/${OWNER_LC}/webhook-proxy:${{ github.sha }}
