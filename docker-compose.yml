@@ -1,0 +1,19 @@
+services:
+  proxy:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - SHARED_SECRET=weekend_key
+      - DEST_URL=http://dummy-destination:9000/webhook
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - dummy-destination
+
+  dummy-destination:
+    build:
+      context: .
+      dockerfile: Dockerfile.dummy
+    ports:
+      - "9000:9000"
