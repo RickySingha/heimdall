@@ -1,7 +1,11 @@
 import sqlite3
 import json
-
+import os
 DB_FILE = "data/proxy.db"
+
+db_dir = os.path.dirname(DB_FILE)
+if db_dir:
+    os.makedirs(db_dir,exist_ok=True)
 
 def init_db() : #create database
     with sqlite3.connect(DB_FILE) as conn:
